@@ -28,8 +28,8 @@ class barangController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
-        $product = barang::create($request->all());
-        return response()->json($product, 201);
+        $barang = barang::create($request->all());
+        return response()->json($barang, 201);
    
 }
 
@@ -42,31 +42,13 @@ class barangController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(barang $barang)
-    {
-       
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        // Validasi input
-        
-
-        // Temukan barang berdasarkan ID
-        $databarang = Barang::findOrFail($id);
-
-        // Perbarui data
-        $databarang->update($request->only(['name', 'amount', 'price']));
-
-        // Kembalikan data yang diperbarui
-        return response()->json($databarang, 200);
+    public function update(Request $request, $id){
+        $barang = barang::find($id);
+        $barang -> update($request->all());
+        return response()->json($barang, 201);
     }
-
     /**
      * Remove the specified resource from storage.
      */

@@ -1,0 +1,50 @@
+Dokumentasi API
+
+1. clone project
+2. jalankan composer install dan tunggu proses selesai
+3. buat database dengan nama "barang"
+4. buat file dengan nama .env lalu copy isi dari file .env.example
+5. ganti settingan databasenya dengan:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=barang
+DB_USERNAME=root
+DB_PASSWORD=
+6. jalankan php artisan key:generate
+7. migrate database
+8. jalankan php artisan serve
+
+untuk keamanan saya masih include csrf didalamnya, 
+jika hendak melakukan testing api mohon untuk ambil csrf tokenya dengan cara
+get server/csrf-token (contoh -> http://127.0.0.1:8000/csrf-token )
+lalu masuk ke bagian header, tambahkan key X-CSRF-TOKEN dan valuenya isi dengan csrf token yg didapat sebelumnya
+
+8. gunakan method post untuk posting data, pathnya server/barang (contoh -> http://127.0.0.1:8000/barang/)
+
+post wajib memasukan 3 data (name, amount, dan price)
+(untuk post bisa menggunakan raw json, parameter, data-form, dll
+    contoh dengan raw json :
+    {
+    "name": "Kalung",
+    "ammount": 2000,
+    "price": 10000000
+    }
+    contoh dengan parameter :
+    http://127.0.0.1:8000/barang/11?name=Kalung&amount=2000&price=10000000
+)
+
+9. gunakan get untuk mengambil semua data, pathnya = server/barang (contoh -> http://127.0.0.1:8000/barang/) atau bisa juga menambahkan id untuk mengambil item yg spesifik (contoh ->http://127.0.0.1:8000/barang/1)
+10. gunakan delete untuk menghapus data yg dipilih, pathnya = server/barang (http://127.0.0.1:8000/barang/id) (contoh ->http://127.0.0.1:8000/barang/1)
+11. gunakan put untuk mengupdate data yg dipilih, pathnya server/barang (http://127.0.0.1:8000/barang/id) (contoh ->http://127.0.0.1:8000/barang/1)
+(untuk update bisa menggunakan raw json, parameter, maupun x-www-form-urlencoded
+    contoh dengan raw json :
+    {
+    "name": "Nama Barang Baru",
+    "ammount": 20,
+    "price": 10000
+    }
+    contoh dengan parameter :
+    http://127.0.0.1:8000/barang/11?name=cincin&amount=20001&price=20001
+)
+
